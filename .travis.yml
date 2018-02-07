@@ -26,7 +26,12 @@ cache:
   - $HOME/CACHE
 deploy:
 - provider: script
-  script: mvn install deploy -Prelease -DskipTests --settings .travis/settings.xml
+  script: mvn deploy -DskipTests --settings .travis/settings.xml
+  skip_cleanup: true
+  true:
+    tags: false
+- provider: script
+  script: mvn install deploy -Papache-release -DskipTests --settings .travis/settings.xml
   skip_cleanup: true
   true:
     repo: apache/incubator-pulsar
